@@ -45,7 +45,7 @@ const Homepage = () => {
               <img className="block mx-auto xl:mx-0" src={task} alt="task" />
             </div>
           </div>
-          <a className="inline-block text-gray-900" href="#">
+          <button className="inline-block text-gray-900" onClick={() => window.scrollTo(0, document.body.scrollHeight)}>
             <svg
               width={26}
               height={30}
@@ -61,7 +61,7 @@ const Homepage = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </button>
         </div>
         <div className="hidden navbar-menu fixed top-0 left-0 bottom-0 w-5/6 max-w-sm z-50">
           <div className="navbar-backdrop fixed inset-0 backdrop-blur-xl backdrop-filter bg-gray-900 bg-opacity-80" />
