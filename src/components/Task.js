@@ -155,7 +155,6 @@ function Task({ task }) {
           />
         );
       default:
-      case "unstarted":
         return (
           <AiOutlineReload
             className="text-2xl text-green-400 cursor-pointer"
