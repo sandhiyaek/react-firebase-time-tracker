@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCjVL0NpzAtbVzJ4XzYS9CIXC_YIc809dI",
-  authDomain: "ek-time-tracker.netlify.app",
-  projectId: "time-tracker-app-fa03a",
-  storageBucket: "time-tracker-app-fa03a.appspot.com",
-  messagingSenderId: "886289214070",
-  appId: "1:886289214070:web:51c187ba3dd2298cfecd57",
+  apiKey: "AIzaSyBDesR5KoGNfyOZwZjslA79TAmhAFeN_7o",
+  authDomain: "time-tracker-11410.firebaseapp.com",
+  projectId: "time-tracker-11410",
+  storageBucket: "time-tracker-11410.firebasestorage.app",
+  messagingSenderId: "778329688647",
+  appId: "1:778329688647:web:902c82a39d46b6751a3f62",
+  measurementId: "G-6FS66QNB4S"
 };
 
 // Initialize Firebase
