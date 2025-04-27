@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCjVL0NpzAtbVzJ4XzYS9CIXC_YIc809dI",
-  authDomain: "time-tracker-app-fa03a.firebaseapp.com",
+  authDomain: "ek-time-tracker.netlify.app",
   projectId: "time-tracker-app-fa03a",
   storageBucket: "time-tracker-app-fa03a.appspot.com",
   messagingSenderId: "886289214070",
