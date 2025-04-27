@@ -1,8 +1,45 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { AiOutlineFieldTime } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import app from "../firebase/config";
+
+// Firestore and Auth instances
+const db = getFirestore(app);
+const auth = getAuth(app);
 
 function CreateTaskPage() {
+  const [task, setTask] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Create task handler
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      setLoading(true);
+      setError(null);
+
+      // Save task into Firestore
+      await addDoc(collection(db, "tasks"), {
+        task: task.trim(),
+        status: "unstarted",
+        startTime: null,
+        endTime: null,
+        userId: auth.currentUser.uid,
+      });
+
+      // Navigate to /reports after successful task creation
+      navigate("/reports");
+    } catch (error) {
+      setError("Error adding task: " + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 min-h-screen flex items-center justify-center">
       <div className="bg-white bg-opacity-10 p-10 rounded-lg backdrop-filter backdrop-blur-lg shadow-lg max-w-md w-full">
@@ -14,7 +51,7 @@ function CreateTaskPage() {
           Turn your plans into achievable tasks. Start by naming your task
           below.
         </p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-8">
             <label htmlFor="task" className="block font-bold text-white mb-2">
               Task description
@@ -23,6 +60,8 @@ function CreateTaskPage() {
               type="text"
               id="task"
               required
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
               className="w-full bg-transparent bg-opacity-50 text-white border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white placeholder-white"
               placeholder="e.g. Complete React Project"
               style={{
@@ -33,12 +72,14 @@ function CreateTaskPage() {
           </div>
           <div className="flex justify-end">
             <button
+              disabled={loading}
               type="submit"
               className="w-full bg-gradient-to-r from-pink-500 to-purple-500 bg-opacity-50 hover:bg-opacity-75 text-white py-3 px-6 rounded focus:outline-none focus:ring-2 focus:ring-white"
             >
-              Create Task
+              {loading ? "Loading please wait" : "Create Task"}
             </button>
           </div>
+          {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
         </form>
       </div>
     </div>
